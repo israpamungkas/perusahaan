@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2018 at 11:43 AM
+-- Generation Time: Jul 14, 2018 at 07:09 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -128,27 +128,26 @@ CREATE TABLE IF NOT EXISTS `tb_karyawan` (
   `jobs` varchar(25) NOT NULL,
   `office` varchar(20) NOT NULL,
   `ket` varchar(50) DEFAULT NULL,
-  `dateinput` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `gaji` longtext NOT NULL,
-  PRIMARY KEY (`id_karyawan`),
-  KEY `dateinput` (`dateinput`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `alpha` int(30) NOT NULL,
+  `izin` int(30) NOT NULL,
+  `sakit` int(30) NOT NULL,
+  `terlambat` int(30) NOT NULL,
+  `sp` int(30) NOT NULL,
+  PRIMARY KEY (`id_karyawan`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `tb_karyawan`
 --
 
-INSERT INTO `tb_karyawan` (`id_karyawan`, `nama`, `tgl_msk`, `jobs`, `office`, `ket`, `dateinput`, `gaji`) VALUES
-(3, 'Riana Yunianti', '2010-12-08', 'Admin Purchase', 'ck', '', '2018-05-23 01:30:21', '2700000'),
-(4, 'Kurniawan', '2010-12-08', 'Finance', 'Head Office', '', '2018-05-23 01:30:29', '2500000'),
-(5, 'Septian', '2015-12-01', 'Head Produksi', 'Head Office', '', '2018-05-23 01:30:33', '4000000'),
-(6, 'Susi Susanti', '2018-01-04', 'Admin', 'Head Office', '', '2018-05-23 01:30:37', '3300000'),
-(7, 'Yulis', '2017-10-10', 'Admin', 'Head Office', '', '2018-05-23 01:30:41', '3000000'),
-(10, 'Diandra Putri', '2018-04-08', 'Finance', 'Head Office', '', '2018-05-22 16:33:19', '3000000'),
-(11, 'Joko Susilo', '2017-04-01', 'Driver', 'ck', '', '2018-05-26 07:59:43', '3000000'),
-(13, 'Purusotama', '2018-05-01', 'IT', 'Head Office', NULL, '2018-05-26 09:19:10', '3400000'),
-(14, 'Irfan', '1970-01-01', 'IT', 'Head Office', NULL, NULL, '4000000'),
-(15, 'Dwi Rizki', '2018-04-23', 'Desainer', 'Head Office', NULL, NULL, '3500000');
+INSERT INTO `tb_karyawan` (`id_karyawan`, `nama`, `tgl_msk`, `jobs`, `office`, `ket`, `gaji`, `alpha`, `izin`, `sakit`, `terlambat`, `sp`) VALUES
+(11, 'Joko Susilo', '2017-04-01', 'Driver', 'CK Tangerang', '', '3000000', 0, 0, 0, 0, 0),
+(13, 'Purusotama', '2018-05-01', 'IT', 'Head Office', NULL, '3400000', 2, 0, 0, 0, 0),
+(14, 'Irfan', '1970-01-01', 'IT', 'CK Bandung', NULL, '4000000', 0, 0, 0, 0, 0),
+(15, 'Dwi Rizki', '2018-04-23', 'Desainer', 'Head Office', NULL, '3500000', 0, 0, 0, 0, 0),
+(18, 'Mauliya Ulfah', '2018-07-09', 'Accounting', 'Head Office', NULL, '4500000', 0, 0, 0, 0, 0),
+(19, 'Andi Adnan', '2018-07-14', 'IT', 'Head Office', NULL, '4000000', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -159,12 +158,7 @@ INSERT INTO `tb_karyawan` (`id_karyawan`, `nama`, `tgl_msk`, `jobs`, `office`, `
 CREATE TABLE IF NOT EXISTS `tb_kriteria` (
   `id_kriteria` int(20) NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
-  `khusus` decimal(30,3) NOT NULL,
-  `umum` decimal(30,3) NOT NULL,
-  `kehadiran` decimal(30,3) NOT NULL,
-  `hukuman` decimal(30,3) NOT NULL,
-  `jumlah_skala` decimal(30,3) NOT NULL,
-  `jumlah_vektor` decimal(30,3) NOT NULL,
+  `skala` int(30) NOT NULL,
   `bobot` decimal(30,3) NOT NULL,
   PRIMARY KEY (`id_kriteria`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
@@ -173,43 +167,11 @@ CREATE TABLE IF NOT EXISTS `tb_kriteria` (
 -- Dumping data for table `tb_kriteria`
 --
 
-INSERT INTO `tb_kriteria` (`id_kriteria`, `nama`, `khusus`, `umum`, `kehadiran`, `hukuman`, `jumlah_skala`, `jumlah_vektor`, `bobot`) VALUES
-(1, 'khusus', '1.000', '2.000', '5.000', '7.000', '0.000', '0.000', '0.000'),
-(2, 'umum', '0.500', '1.000', '3.000', '5.000', '0.000', '0.000', '0.000'),
-(3, 'kehadiran', '0.200', '0.333', '1.000', '3.000', '0.000', '0.000', '0.000'),
-(4, 'hukuman', '0.143', '0.200', '0.333', '1.000', '0.000', '0.000', '0.000');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_kriteria_khusus`
---
-
-CREATE TABLE IF NOT EXISTS `tb_kriteria_khusus` (
-  `id_kriteria` int(30) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(50) NOT NULL,
-  `pengetahuan` decimal(30,3) NOT NULL,
-  `ketelitian` decimal(30,3) NOT NULL,
-  `keputusan` decimal(30,3) NOT NULL,
-  `tanggung_jwb` decimal(30,3) NOT NULL,
-  `hasil_kerjaan` decimal(30,3) NOT NULL,
-  `jumlah_skala` decimal(30,3) NOT NULL,
-  `jumlah_vektor` decimal(30,3) NOT NULL,
-  `bobot` decimal(30,3) NOT NULL,
-  `bobot_akhir` decimal(30,3) NOT NULL,
-  PRIMARY KEY (`id_kriteria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `tb_kriteria_khusus`
---
-
-INSERT INTO `tb_kriteria_khusus` (`id_kriteria`, `nama`, `pengetahuan`, `ketelitian`, `keputusan`, `tanggung_jwb`, `hasil_kerjaan`, `jumlah_skala`, `jumlah_vektor`, `bobot`, `bobot_akhir`) VALUES
-(1, 'pengetahuan', '1.000', '5.000', '5.000', '5.000', '5.000', '0.000', '0.000', '0.000', '0.000'),
-(2, 'ketelitian', '0.200', '1.000', '1.000', '0.200', '0.200', '0.000', '0.000', '0.000', '0.000'),
-(3, 'keputusan', '0.200', '1.000', '1.000', '0.200', '0.200', '0.000', '0.000', '0.000', '0.000'),
-(4, 'tanggung jawab', '1.000', '5.000', '5.000', '1.000', '0.100', '0.000', '0.000', '0.000', '0.000'),
-(5, 'hasil kerjaan', '1.000', '5.000', '5.000', '1.000', '1.000', '0.000', '0.000', '0.000', '0.000');
+INSERT INTO `tb_kriteria` (`id_kriteria`, `nama`, `skala`, `bobot`) VALUES
+(1, 'umum', 7, '0.559'),
+(2, 'khusus', 5, '0.263'),
+(3, 'kehadiran', 3, '0.122'),
+(4, 'hukuman', 1, '0.056');
 
 -- --------------------------------------------------------
 
@@ -232,6 +194,27 @@ INSERT INTO `tb_level` (`id`, `level`) VALUES
 (2, 'General Manager'),
 (3, 'Manager'),
 (4, 'Karyawan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_masa`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_masa` (
+  `id_masa` int(20) NOT NULL AUTO_INCREMENT,
+  `masa` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_masa`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tb_masa`
+--
+
+INSERT INTO `tb_masa` (`id_masa`, `masa`) VALUES
+(1, 'percobaan'),
+(2, 'kontrak'),
+(3, 'tetap');
 
 -- --------------------------------------------------------
 
@@ -259,21 +242,85 @@ CREATE TABLE IF NOT EXISTS `tb_penilaian` (
   `jenis_id15` int(30) NOT NULL,
   `jenis_id16` int(30) NOT NULL,
   `jml_id` decimal(30,3) NOT NULL,
+  `periode` int(11) NOT NULL,
   `jenis_id` int(30) NOT NULL,
   PRIMARY KEY (`id_penilaian`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tb_penilaian`
 --
 
-INSERT INTO `tb_penilaian` (`id_penilaian`, `id_karyawan`, `jenis_id1`, `jenis_id2`, `jenis_id3`, `jenis_id4`, `jenis_id5`, `jenis_id6`, `jenis_id7`, `jenis_id8`, `jenis_id9`, `jenis_id10`, `jenis_id11`, `jenis_id12`, `jenis_id13`, `jenis_id14`, `jenis_id15`, `jenis_id16`, `jml_id`, `jenis_id`) VALUES
-(1, 10, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.755', 3),
-(2, 11, 5, 5, 5, 5, 5, 5, 1, 5, 5, 4, 3, 3, 5, 5, 5, 5, '4.721', 3),
-(3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.000', 1),
-(4, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.000', 1),
-(5, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.000', 1),
-(6, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.000', 1);
+INSERT INTO `tb_penilaian` (`id_penilaian`, `id_karyawan`, `jenis_id1`, `jenis_id2`, `jenis_id3`, `jenis_id4`, `jenis_id5`, `jenis_id6`, `jenis_id7`, `jenis_id8`, `jenis_id9`, `jenis_id10`, `jenis_id11`, `jenis_id12`, `jenis_id13`, `jenis_id14`, `jenis_id15`, `jenis_id16`, `jml_id`, `periode`, `jenis_id`) VALUES
+(13, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.000', 0, 0),
+(14, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0.000', 0, 1),
+(15, 13, 5, 5, 5, 4, 5, 4, 5, 5, 5, 4, 4, 5, 5, 5, 5, 5, '4.747', 0, 2),
+(16, 19, 5, 5, 5, 5, 5, 4, 4, 4, 3, 4, 5, 5, 5, 5, 4, 5, '4.662', 0, 2),
+(17, 10, 5, 4, 4, 5, 3, 3, 4, 4, 5, 3, 5, 4, 3, 2, 1, 4, '0.045', 0, 1),
+(18, 15, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, '3.996', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_skala`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_skala` (
+  `id_skala` int(11) NOT NULL AUTO_INCREMENT,
+  `nilai_skala` int(11) NOT NULL,
+  `nama_skala` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_skala`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `tb_skala`
+--
+
+INSERT INTO `tb_skala` (`id_skala`, `nilai_skala`, `nama_skala`) VALUES
+(1, 0, 'Belum Dinilai'),
+(2, 1, 'Tidak Penting'),
+(3, 3, 'Kurang Penting'),
+(4, 5, 'Cukup Penting'),
+(5, 7, 'Penting'),
+(6, 9, 'Sangat Penting');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_sub_kriteria`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_sub_kriteria` (
+  `id_sub_kriteria` int(30) NOT NULL AUTO_INCREMENT,
+  `id_kriteria` int(30) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `skala` int(30) NOT NULL,
+  `bobot` decimal(30,3) NOT NULL,
+  `bobot_hasil` decimal(30,3) NOT NULL,
+  PRIMARY KEY (`id_sub_kriteria`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `tb_sub_kriteria`
+--
+
+INSERT INTO `tb_sub_kriteria` (`id_sub_kriteria`, `id_kriteria`, `nama`, `skala`, `bobot`, `bobot_hasil`) VALUES
+(1, 1, 'proaktif', 3, '0.062', '0.034'),
+(2, 1, 'percaya diri', 3, '0.062', '0.034'),
+(3, 1, 'disiplin', 7, '0.251', '0.140'),
+(4, 1, 'mandiri', 9, '0.462', '0.258'),
+(5, 1, 'emosi', 5, '0.133', '0.074'),
+(6, 1, 'kerjasama', 1, '0.030', '0.017'),
+(7, 2, 'pengetahuan', 0, '0.200', '0.053'),
+(8, 2, 'akurasi', 0, '0.200', '0.053'),
+(9, 2, 'keputusan', 0, '0.200', '0.053'),
+(10, 2, 'tangung jawab', 0, '0.200', '0.053'),
+(11, 2, 'hasil kerjaan', 0, '0.200', '0.053'),
+(12, 3, 'alpha', 9, '0.714', '0.087'),
+(13, 3, 'izin', 5, '0.143', '0.017'),
+(14, 3, 'sakit', 5, '0.143', '0.017'),
+(15, 4, 'surat peringatan', 9, '0.833', '0.047'),
+(16, 4, 'terlambat', 5, '0.167', '0.009');
 
 -- --------------------------------------------------------
 
@@ -317,14 +364,14 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
   `password` varchar(45) NOT NULL,
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `id_karyawan`, `nama`, `email`, `password`, `level`) VALUES
-(1, 0, 'israpamungkas', 'israpamungkas@gmail.com', '12345', 1),
+(1, 0, 'israpamungkas', 'israpamungkas@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 1),
 (2, 0, 'selvi okta', 'selviokta@gmail.com', '12345', 2),
 (3, 0, 'Lidwina Yahya', 'lidwinayah@gmail.com', '12345', 3),
 (4, 0, 'idelia', 'ideliacan@gmail.com', '12345', 3),
@@ -336,7 +383,10 @@ INSERT INTO `tb_user` (`id_user`, `id_karyawan`, `nama`, `email`, `password`, `l
 (11, 11, 'Joko Susilo', 'jokosusilo@gmail.com', '12345', 4),
 (12, 13, 'Purusotama', 'purusotama@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 4),
 (13, 14, 'Irfan', 'irfanrizki@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 4),
-(14, 15, 'Dwi Rizki', 'dwirizki@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 4);
+(14, 15, 'Dwi Rizki', 'dwirizki@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 4),
+(15, 16, 'Muhamad Arif', 'muharif@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 4),
+(16, 18, 'Mauliya Ulfah', 'mauliya@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 4),
+(17, 19, 'Andi Adnan', 'andiadnan@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
