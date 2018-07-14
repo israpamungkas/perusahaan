@@ -39,11 +39,18 @@ class Model_general extends CI_Model {
 /*  Function for Input Nilai */
 			public function tampil_nilai()
 	{
-return $this->db->select('a.*, b.jenis_id, b.jenis_surat, DATE_ADD(tgl_msk, INTERVAL 90 DAY) as jatuh_tempo, DATEDIFF(DATE_ADD(tgl_msk, INTERVAL 90 DAY), CURDATE()) as selisih')
-				 ->from('tb_karyawan a')
+return $this->db->select('a.*, b.jenis_id, b.jenis_surat, d.*, DATE_ADD(tgl_msk, INTERVAL 90 DAY) as jatuh_tempo, DATEDIFF(DATE_ADD(tgl_msk, INTERVAL 90 DAY), CURDATE()) as selisih')
+				 ->from('tb_penilaian a')
 				 ->join('tb_jenis_surat b', 'a.jenis_id = b.jenis_id')
-				 ->join('tb_user c', 'c.id_karyawan = a.id_karyawan')
-				 ->where(array('c.id_user' => $id_user))->get();
+				 ->join('tb_user c', 'a.id_karyawan = c.id_karyawan')
+				 ->join('tb_karyawan d', 'a.id_karyawan = d.id_karyawan')
+				 ->get();
+
+
+		return $this->db->query("SELECT a.*, b.jenis_id, b.jenis_surat FROM tb_karyawan as a, tb_jenis_surat as b WHERE a.jenis_id=b.jenis_id");
+
+		return $this->db->query("SELECT a.*, b.jenis_id, b.jenis_nilai FROM tb_karyawan as a, tb_hmp_kriteria as b WHERE 
+		a.jenis_id=b.jenis_id ");
 		
 	}
 

@@ -265,7 +265,8 @@
                  <h5 class="box-title"><b>III . CATATAN KEHADIRAN<b></h5>
                 <div class="box-header with-border">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">1 . Alpha (Alpa 0 = 5 , Alpa 1 = 3 , Alpa 2 = 3 , Alpa 3 = 2 , Alpa 4 = 1 , Alpa 5 = 1)</label>
+                    <label for="exampleInputEmail1">1 . Alpha = [ <?php echo $data->alpha ?> ] <p><i>(Alpa 0 = 5 , Alpa 1 = 3 , Alpa 2 = 3 , Alpa 3 = 2 , Alpa 4 = 1 , Alpa 5 = 1)</i></p></label> 
+                  
                       <select name="jenis12" class="form-control">
                         <?php
                         $jenis12 = $this->db->query("SELECT * FROM tb_hmp_kriteria")->result();
@@ -284,7 +285,7 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">2 . Izin (Izin 0 = 5 , Izin 1 = 4 , Izin 2 = 3 , Izin 3 = 2 , Izin 4 = 1 , Izin > 5 = 1)</label>
+                    <label for="exampleInputEmail1">2 . Izin = [ <?php echo $data->izin ?> ] <p><i>(Izin 0 = 5 , Izin 1 = 4 , Izin 2 = 3 , Izin 3 = 2 , Izin 4 = 1 , Izin > 5 = 1)</i></p></label>
                       <select name="jenis13" class="form-control">
                         <?php
                         $jenis13 = $this->db->query("SELECT * FROM tb_hmp_kriteria")->result();
@@ -303,7 +304,7 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">3 . Sakit (Sakit 0 = 5 , Sakit 1 = 4 , Sakit 2 = 3 , Sakit 3 = 2 , Sakit 4 = 1 , Sakit > 5 = 1 )</label>
+                    <label for="exampleInputEmail1">3 . Sakit = [ <?php echo $data->sakit ?> ] <p><i>(Sakit 0 = 5 , Sakit 1 = 4 , Sakit 2 = 3 , Sakit 3 = 2 , Sakit 4 = 1 , Sakit > 5 = 1 )</i></p></label>
                       <select name="jenis14" class="form-control">
                         <?php
                         $jenis14 = $this->db->query("SELECT * FROM tb_hmp_kriteria")->result();
@@ -326,7 +327,7 @@
                   <h5 class="box-title"><b>IV . CATATAN HUKUMAN/PUSNISMENT<b></h5>
                 <div class="box-header with-border">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">1 . Surat peringatan (Tidak ada = 5 , Lisan/teguran = 4 , SP 1 : 3) </label>
+                    <label for="exampleInputEmail1">1 . Surat peringatan = [ <?php echo $data->sp ?> ] <p><i>(Tidak ada = 5 , Lisan/teguran = 4 , SP 1 : 3)</i></p></label>
                       <select name="jenis15" class="form-control">
                         <?php
                         $jenis15 = $this->db->query("SELECT * FROM tb_hmp_kriteria")->result();
@@ -345,7 +346,7 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">2 . Terlambat. (Terlambat 0-3 = 5, Terlambat 4-5 = 4 , Terlambat 6-8 = 3 , Terlambat 8-10 = 2 , Terlambat > 10 = 1)</label>
+                    <label for="exampleInputEmail1">2 . Terlambat = [ <?php echo $data->terlambat ?> ] <p><i>(Terlambat 0-3 = 5, Terlambat 4-5 = 4 , Terlambat 6-8 = 3 , Terlambat 8-10 = 2 , Terlambat > 10 = 1)</i></p></label>
                       <select name="jenis16" class="form-control">
                         <?php
                         $jenis16 = $this->db->query("SELECT * FROM tb_hmp_kriteria")->result();

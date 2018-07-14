@@ -365,16 +365,16 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">2 . Terlambat. (Terlambat 0-3 = 5, Terlambat 4-5 = 4 , Terlambat 6-8 = 3 , Terlambat 8-10 = 2 , Terlambat > 10 = 1)</label>
-                      <select name="jenis17" class="form-control">
+                      <select name="jenis16" class="form-control">
                         <?php
-                        $jenis17 = $this->db->query("SELECT * FROM tb_hmp_kriteria")->result();
+                        $jenis16 = $this->db->query("SELECT * FROM tb_hmp_kriteria")->result();
                         
-                        if (empty($jenis17)) {
+                        if (empty($jenis16)) {
                           echo "<option  value=''> --Tidak Ada Data-- </option>";
                         } else {
-                        foreach($jenis17 as $jenis_nilai){
+                        foreach($jenis16 as $jenis_nilai){
                         ?>
-                       <option <?php if( $data->jenis_id17 == $jenis_nilai->jenis_id) {echo "selected"; } ?> value='<?php echo $jenis_nilai->jenis_id ;?>'><?php echo $jenis_nilai->jenis_nilai ;?></option>
+                       <option <?php if( $data->jenis_id16 == $jenis_nilai->jenis_id) {echo "selected"; } ?> value='<?php echo $jenis_nilai->jenis_id ;?>'><?php echo $jenis_nilai->jenis_nilai ;?></option>
 
                         <?php 
                           } 
@@ -383,26 +383,6 @@
                       </select>
                   </div>
 
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">STATUS</label>
-                      <select name="jenis" class="form-control">
-                        <?php
-                        $jenis = $this->db->query("SELECT * FROM tb_jenis_surat")->result();
-                        
-                        if (empty($jenis)) {
-                          echo "<option  value=''> --Tidak Ada Data-- </option>";
-                        } else {
-                        foreach($jenis as $jenis_surat){
-                        ?>
-                       <option <?php if( $data->jenis_id == $jenis_surat->jenis_id) {echo "selected"; } ?> value='<?php echo $jenis_surat->jenis_id ;?>'><?php echo $jenis_surat->jenis_surat ;?></option>
-
-                        <?php 
-                          } 
-                          }
-                        ?>
-                      </select>
-                  </div>
-                  
                   <input type="hidden" name="id" value="<?php echo $data->id_karyawan ?>">
                   <a href="<?php echo base_url(); ?>general/input_nilai" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>

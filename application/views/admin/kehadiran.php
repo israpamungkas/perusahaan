@@ -20,7 +20,7 @@
           		<div class="box">
                 <div class="box-header">
                   <h3 class="box-title">
-                  <a href="<?php echo base_url(); ?>admin/tambah_nilai" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Tambah</a>
+                  <!--<a href="<?php echo base_url(); ?>admin/tambah_kehadiran" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Tambah</a>-->
                   </h3>
                   <div class="box-tools">
                   	<!--
@@ -38,17 +38,13 @@
                   <table id="example1" class="table table-bordered table-hover dataTable">
                     <thead>
                       <tr>
-                         <th>No</th>
+                        <th>No</th>
                         <th>Nama</th>
-                        <th>NIK</th>
-                        <th>Gaji</th>
-                        <th>Masuk</th>
-                        <th>Jatuh Tempo</th>
-                        <th>Sisa Hari</th>
-                        <th>Jabatan</th>
-                        <th>Jumlah Nilai</th>
-                        <th>Status</th>
-                        <th>Ket</th>
+                        <th>Alpha</th>
+                        <th>Izin</th>
+                        <th>Sakit</th>
+                        <th>Terlambat</th>
+                        <th>Surat Peringatan</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
@@ -59,26 +55,16 @@
                       <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo ucwords($lihat->nama)?></td>
-                        <td><?php echo ucwords($lihat->id_karyawan)?></td>
-                        <td>Rp.<?php echo number_format($lihat->gaji,0,',',',')?>,-</td>
-                        <td><?php echo tgl_indo($lihat->tgl_msk)?></td>
-                        <td><i><?php echo tgl_indo($lihat->jatuh_tempo)?></i></td>
-                        <td><i><?php if ($lihat->selisih < 0) {echo "0";}else{echo ucwords($lihat-> selisih.' hari');}?></i></td>
-                        <td><i><?php echo ucwords($lihat->jobs)?></i></td>
-                        <td><?php echo ucwords($lihat->jml_id)?></td>
-                        <td align="center">
-                        <a class="btn btn-sm btn-primary" style="background-color: black;"> <?php echo ucwords($lihat->jenis_surat)?>
-                        </a>
-                        </td>
-                        <td><?php echo ucwords($lihat->ket)?></td>
-                        <td align="center">
+                        <td><?php echo ucwords($lihat->alpha)?></td>
+                        <td><?php echo ucwords($lihat->izin)?></td>
+                        <td><?php echo ucwords($lihat->sakit)?></td>
+                        <td><?php echo ucwords($lihat->terlambat)?></td>
+                        <td><?php echo ucwords($lihat->sp)?></td>
+                        <td align="align left">
                           <div class="btn-group" role="group">
-                            <?php if($lihat->selisih > 0): ?>
-                            <a href="<?php echo base_url(); ?>admin/edit_nilai/<?php echo $lihat->id_karyawan ?>" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Edit</a>
-                          <?php endif; ?>
-                            <a href="<?php echo base_url(); ?>admin/hapus_nilai/<?php echo $lihat->id_karyawan ?>" onclick="javascript: return confirm('Anda yakin akan menghapus data ini ?')" class="btn btn-sm btn-danger btn-flat"><i class="fa fa-trash"></i> Hapus</a>
+                            <a href="<?php echo base_url(); ?>admin/edit_kehadiran/<?php echo $lihat->id_karyawan ?>" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Edit</a>
                           </div>
-                        </td>                               		
+                        </td>                                         		
                     	</tr>
                     	<?php endforeach; ?>
                     </tbody>

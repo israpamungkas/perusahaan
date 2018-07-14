@@ -10,10 +10,12 @@ class General extends CI_Controller {
 		}
 			$id_user = $this->session->userdata('id_user');
 			$a['jenis']	= $this->model_general->tampil_jenis()->num_rows(); //untuk ambil data dari file model_admin.php dengan function tampil_jenis
-			$a['manage_user']	= $this->model_general->tampil_user($id_user)->num_rows();
-			$a['surat_keluar']	= $this->model_general->tampil_surat_keluar()->num_rows();
-			$a['input_nilai']	= $this->model_general->tampil_nilai()->num_rows();
-			$a['himpunan']	= $this->model_general->tampil_himpunan()->num_rows();
+			$a['manage_user']	= $this->model_admin->tampil_user()->num_rows();
+			$a['surat_keluar']	= $this->model_admin->tampil_surat_keluar()->num_rows();
+			$a['input_nilai']	= $this->model_admin->tampil_nilai()->num_rows();
+			$a['himpunan']	= $this->model_admin->tampil_himpunan()->num_rows();
+			$a['kriteria']	= $this->model_admin->tampil_kriteria()->num_rows();
+			$a['kriteria_khusus']	= $this->model_admin->tampil_kriteria_khusus()->num_rows();
 			$a['page']	= "home";
 
 			$this->load->view('general/index', $a);
@@ -178,7 +180,9 @@ class General extends CI_Controller {
 		$a['data']	= $this->model_general->tampil_nilai()->result_object();
 		$a['page']	= "input_nilai";
 		
+		$this->output->enable_profiler(true);
 		$this->load->view('general/index', $a);
+	
 	}
 
 	function tambah_nilai(){
@@ -228,7 +232,7 @@ class General extends CI_Controller {
 
 
 	function edit_nilai($id){
-		$a['editdata']	= $this->db->get_where('tb_karyawan',array('id_karyawan'=>$id))->result_object();		
+		$a['editdata']	= $this->db->select('*')->from('tb_penilaian tp')->join('tb_karyawan tk', 'tp.id_karyawan=tk.id_karyawan')->where('tp.id_karyawan', $id)->get()->result();		
 		$a['page']	= "edit_nilai";
 		
 		$this->load->view('general/index', $a);
@@ -236,9 +240,6 @@ class General extends CI_Controller {
 
 	function update_nilai(){
 		$id = $this->input->post('id');
-		$nama = $this->input->post('nama');
-		$tgl = $this->input->post('tgl');
-		$jobs = $this->input->post('jobs');
 		$jenis1 = $this->input->post('jenis1');
 		$jenis2 = $this->input->post('jenis2');
 		$jenis3 = $this->input->post('jenis3');
@@ -255,13 +256,9 @@ class General extends CI_Controller {
 		$jenis14 = $this->input->post('jenis14');
 		$jenis15 = $this->input->post('jenis15');
 		$jenis16 = $this->input->post('jenis16');
-		$jenis17 = $this->input->post('jenis17');
-		$jml_id = ($jenis1)*0.151+($jenis2)*0.030+($jenis3)*0.030+($jenis4)*0.151+($jenis5)*0.151+($jenis6)*0.029+($jenis7)*0.029+($jenis8)*0.117+($jenis9)*0.051+($jenis10)*0.018+($jenis11)*0.03+($jenis12)*0.03+($jenis13)*0.092+($jenis14)*0.018+($jenis15)*0.018+($jenis16)*0.05+($jenis17)*0.01;
+		$jml_id = ($jenis1)*0.151+($jenis2)*0.030+($jenis3)*0.030+($jenis4)*0.151+($jenis5)*0.151+($jenis6)*0.029+($jenis7)*0.029+($jenis8)*0.117+($jenis9)*0.051+($jenis10)*0.018+($jenis11)*0.03+($jenis12)*0.03+($jenis13)*0.092+($jenis14)*0.018+($jenis15)*0.018+($jenis16)*0.05;
 		$jenis = $this->input->post('jenis');
 		$object = array(
-				'nama' => $nama,
-				'tgl_msk' => $tgl,
-				'jobs' => $jobs,
 				'jenis_id1' => $jenis1,
 				'jenis_id2' => $jenis2,
 				'jenis_id3' => $jenis3,
@@ -278,12 +275,11 @@ class General extends CI_Controller {
 				'jenis_id14' => $jenis14,
 				'jenis_id15' => $jenis15,
 				'jenis_id16' => $jenis16,
-				'jenis_id17' => $jenis17,
 				'jml_id' => $jml_id,
 				'jenis_id' => $jenis,
 			);
 		$this->db->where('id_karyawan', $id);
-		$this->db->update('tb_karyawan', $object); 
+		$this->db->update('tb_penilaian', $object); 
 
 		redirect('general/input_nilai','refresh');
 	}
@@ -291,7 +287,7 @@ class General extends CI_Controller {
 
 	function hapus_nilai($id){
 		
-		$this->model_general->hapus_nilai($id);
+		$this->model_admin->hapus_nilai($id);
 		redirect('general/input_nilai','refresh');
 	}
 

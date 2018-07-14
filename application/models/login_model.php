@@ -6,7 +6,7 @@ class Login_model extends CI_Model {
 	public function ceklogin($email, $pass)
 	{
 		$this->db->where('email', $email);
-		$this->db->where('password', $pass);
+		$this->db->where('password', md5($pass));
 		return $this->db->get('tb_user')->row();
 	}
 

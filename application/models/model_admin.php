@@ -7,9 +7,9 @@ class Model_admin extends CI_Model {
 		return $this->db->get('tb_kriteria');
 	}
 
-	public function tampil_kriteria_khusus()
+	public function tampil_subkriteria()
 	{
-		return $this->db->get('tb_kriteria_khusus');
+		return $this->db->get('tb_sub_kriteria');
 	}
 	
 	public function tampil_jenis()
@@ -63,11 +63,27 @@ class Model_admin extends CI_Model {
 		a.jenis_id=b.jenis_id ");
 		
 	}
-
 	
 	public function hapus_nilai($id)
 	{
 		return $this->db->delete('tb_karyawan', array('id_karyawan' => $id));
+	}
+
+/*  Function for Tampil Kehadiran */
+	public function tampil_kehadiran()
+	{	
+		return $this->db->select('id_karyawan, nama, alpha, izin, sakit, terlambat, sp') ->from ("tb_karyawan")->get();	
+	}
+
+	public function edit_kehadiran($id)
+	{
+		return $this->db->get_where('tb_karyawan',array('id_karyawan'=>$id));
+	}
+
+	public function update_kehadiran($id, $object)
+	{
+		$this->db->where('id_karyawan', $id);
+		$this->db->update('tb_karyawan', $object); 
 	}
 
 /* Function for Cek Login */
@@ -122,7 +138,7 @@ class Model_admin extends CI_Model {
 
 	/*  Function for Grafik */
 	public function get_jenis_id_rows(){
-		return $this->db->query("SELECT tj.jenis_surat, COUNT( tk.id_karyawan ) AS total FROM tb_karyawan AS tk JOIN tb_jenis_surat AS tj ON tk.jenis_id = tj.jenis_id WHERE NOT tk.jenis_id =  '1' GROUP BY tk.jenis_id");
+		return $this->db->query("SELECT tj.jenis_surat, COUNT( tk.id_karyawan ) AS total FROM tb_penilaian AS tk JOIN tb_jenis_surat AS tj ON tk.jenis_id = tj.jenis_id WHERE NOT tk.jenis_id =  '1' GROUP BY tk.jenis_id");
 	}
 
 	//public function get_jenis_id_rows(){
@@ -130,7 +146,7 @@ class Model_admin extends CI_Model {
 	//}
 
 	public function get_score_category(){
-		return $this->db->query("SELECT keterangan, COUNT( id_karyawan ) AS total FROM tb_hmp_kriteria AS th, tb_karyawan AS tk WHERE tk.jml_id >= th.min AND tk.jml_id <= th.maks and not th.jenis_id = '0' GROUP BY th.jenis_id");
+		return $this->db->query("SELECT keterangan, COUNT( id_karyawan ) AS total FROM tb_hmp_kriteria AS th, tb_penilaian AS tk WHERE tk.jml_id >= th.min AND tk.jml_id <= th.maks and not th.jenis_id = '0' GROUP BY th.jenis_id");
 	}
 
 	public function get_options()
@@ -141,6 +157,14 @@ class Model_admin extends CI_Model {
 	public function get_level_options()
 	{
 		return $this->db->select('id, level')->from('tb_level')->get()->result();	
+	}
+
+	public function get_skala_kriteria(){
+		return $this->db->select('id_kriteria, nama, skala')->from('tb_kriteria')->order_by('id_kriteria')->get()->result();
+	}
+
+	public function get_skala_sub_kriteria($id_kriteria){
+		return $this->db->select('id_sub_kriteria, nama, skala')->from('tb_sub_kriteria')->where('id_kriteria', $id_kriteria)->order_by('id_sub_kriteria')->get()->result();
 	}
 
 }

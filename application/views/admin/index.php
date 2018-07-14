@@ -91,6 +91,11 @@
                 <i class="fa fa-envelope"></i> <span>Input Nilai</span>
               </a>
             </li>
+            <li class="<?php if($page == 'kehadiran'){echo 'active';} ?>">
+              <a href="<?php echo base_url(); ?>admin/kehadiran">
+                <i class="fa fa-bell"></i> <span>Kehadiran</span>
+              </a>
+            </li>
             <li class="<?php if($page == 'jenis_surat'){echo 'active';} ?>">
               <a href="<?php echo base_url(); ?>admin/jenis_surat">
                 <i class="fa fa-tag"></i> <span>Assessment Report</span>

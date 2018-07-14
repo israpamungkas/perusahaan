@@ -3,8 +3,8 @@
         <!-- Content Header (Page header) -->
           <section class="content-header">
             <h1>
-              Tambah
-              <small>User</small>
+              Edit
+              <small>Nilai Kriteria</small>
             </h1>
             <ol class="breadcrumb">
               <li><i class="fa fa-dashboard"></i> Home</a></li>
@@ -21,7 +21,7 @@
           <section class="content">
             <div class="box box-info">
               <div class="box-header with-border">
-                <h3 class="box-title">Form Data Tambah User</h3>
+                <h3 class="box-title">Form Edit Nilai Kriteria</h3>
               </div>
               <div class="box-body">
                 <!-- form start -->

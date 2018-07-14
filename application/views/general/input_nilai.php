@@ -73,8 +73,10 @@
                         <td><?php echo ucwords($lihat->ket)?></td>
                         <td align="center">
                           <div class="btn-group" role="group">
-                            <a href="<?php echo base_url(); ?>general/edit_nilai/<?php echo $lihat->id_karyawan ?>" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="<?php echo base_url(); ?>general/hapus_nilai/<?php echo $lihat->id_karyawan ?>" onclick="javascript: return confirm('Anda yakin akan menghapus data ini ?')" class="btn btn-sm btn-danger btn-flat"><i class="fa fa-trash"></i> Hapus</a>
+                            <?php if($lihat->selisih > 0): ?>
+                            <a href="<?php echo base_url(); ?>admin/edit_nilai/<?php echo $lihat->id_karyawan ?>" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Edit</a>
+                          <?php endif; ?>
+                            <a href="<?php echo base_url(); ?>admin/hapus_nilai/<?php echo $lihat->id_karyawan ?>" onclick="javascript: return confirm('Anda yakin akan menghapus data ini ?')" class="btn btn-sm btn-danger btn-flat"><i class="fa fa-trash"></i> Hapus</a>
                           </div>
                         </td>                               		
                     	</tr>

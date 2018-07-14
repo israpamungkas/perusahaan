@@ -20,7 +20,7 @@
           		<div class="box">
                 <div class="box-header">
                   <h3 class="box-title">
-                  	<a href="<?php echo base_url(); ?>admin/tambah_user" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Tambah</a>
+                  	<a href="<?php echo base_url(); ?>admin/edit_nilai_kriteria" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Tambah</a>
                   </h3>
                   <div class="box-tools">
                   	<!--
@@ -34,39 +34,55 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                
-                  <table id="example1" class="table table-bordered table-hover dataTable">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Khusus</th>
-                        <th>Umum</th>
-                        <th>Kehadiran</th>
-                        <th>Hukuman</th>
-                        <th><i>Jumlah Skala</i></th>
-                        <th><i>Jumlah Vektor</i></th>
-                        <th><i>Bobot</i></th>
-                    </thead>
-                    <tbody>
-                      	<?php  
-                        $no = 1;
-                        foreach ($data as $lihat):
-                        ?>
-                    	<tr>
-                        <td><?php echo $no++ ?></td>
-                        <td><?php echo ucwords($lihat->nama)?></td>
-                        <td><?php echo ucwords($lihat->khusus)?></td>
-                    		<td><?php echo ucwords($lihat->umum)?></td>
-                        <td><?php echo ucwords($lihat->kehadiran)?></td>
-                        <td><?php echo ucwords($lihat->hukuman)?></td>
-                        <td><?php echo ucwords($lihat->jumlah_skala)?></td>
-                        <td><?php echo ucwords($lihat->jumlah_vektor)?></td>
-                        <td><?php echo ucwords($lihat->bobot)?></td>          		
-                    	</tr>
-                    	<?php endforeach; ?>
-                    </tbody>
-                  </table>
+                          
+                    <table id="example1" class="table table-bordered table-hover dataTable">
+                          <thead>
+                            <tr>
+                              <th>Nama Kriteria</th>
+                              <th>Skala</th>
+                              <th>Bobot</th>  
+                            </tr>                            
+                          </thead>
+                          <tbody>
+                            <?php foreach ($kriteria as $item): ?>  
+                              <tr>
+                                <td><?php echo $item->nama; ?></td>
+                                <td><?php echo $item->skala; ?></td>
+                                <td><?php echo $item->bobot; ?></td>
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
+                    </table><br><br>
+
+                    <?php foreach($kriteria as $item): ?>
+
+                      <h3><strong>Sub kriteria <?php echo $item->nama; ?></strong></h3>
+                      <table id="example1" class="table table-bordered table-hover dataTable">
+                        <thead>
+                          <tr>
+                              <th>Nama Sub kriteria</th>
+                              <th>Skala</th>
+                              <th>Bobot</th>
+                              <th>Bobot Hasil</th>
+                          </tr>                            
+                        </thead>
+                        <tbody>
+                          <?php foreach ($subkriteria as $item1): ?>
+                            <?php if($item1->id_kriteria == $item->id_kriteria): ?>
+                                <tr>
+                                  <td><?php echo $item1->nama; ?></td>
+                                  <td><?php echo $item1->skala; ?></td>
+                                  <td><?php echo $item1->bobot; ?></td>
+                                  <td><?php echo $item1->bobot_hasil; ?></td>
+                                </tr>
+                            <?php endif ?>
+                          <?php endforeach; ?>
+                        </tbody>
+
+                      </table><br><br>
+                    <?php endforeach; ?>
+                  
+                  
                   <div class="form-group">
                     <h4><label for="exampleInputEmail1"><i>Consistency Indicator (CI)</i></label></h4>
                       <input type="text" class="form-control" readonly="readonly" name="email" />

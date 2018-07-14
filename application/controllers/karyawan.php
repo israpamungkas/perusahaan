@@ -176,6 +176,7 @@ class Karyawan extends CI_Controller {
 
 	/* Fungsi Manage Nilai */
 	function input_nilai(){
+		$this->output->enable_profiler(true);
 		$id_user = $this->session->userdata('id_user');
 		$a['data']	= $this->model_karyawan->tampil_nilai($id_user)->result_object();
 		$a['page']	= "input_nilai";

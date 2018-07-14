@@ -89,23 +89,21 @@
             </div><!-- ./col -->
           </div><!-- /.row -->
           
-          <div class="box">
           <div class="row">
                 <div class="col-md-6">
 
                     <div id="chart-score" style="width: 700px; height: 400px;"></div>
                 </div>
-                <a href="localhost/perusahaan/admin"><center>Klik untuk melihat nilai</center></a>
+                
                 <div class="col-md-6">
                     <div id="chart-status" style="width: 700px; height: 400px;"></div>
-                </div>                    
-          </div>
+          </div>                    
+          
           <div class="row">
                     <div class="col-md-6">
                         <div id="chart-score-ho" style="width: 450px; height: 250px;"></div>
                     </div>                    
           </div>  
-        </div>
 
 <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
